@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost/mobstergo', (err, db) => {
   }
 });
 
-
+app.use(express.static('public'));
 //parse json data
 app.use(bodyParser.json());
 //initialize routes
