@@ -2,15 +2,24 @@ const express = require('express');
 const router = express.Router();
 const Mobster = require('../models/mobster');
 
+router.all('/mobsters', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+  });
+  
 router.get('/mobsters', (req, res, next) => {
-    Mobster.aggregate().near({
-        near: { type: "Point", coordinates: [parseFloat(req.query.lng) , parseFloat(req.query.lat)] },
-                    distanceField: "dist.calculated",
-                    maxDistance: 100000,
-                    spherical: true
-        }).then((mobsters) => {
-            res.send(mobsters);
-        }).catch(next);
+    Mobster.find({}).then((mobsters) => {
+        res.send(mobsters)
+    }).catch(next);
+    // Mobster.aggregate().near({
+    //     near: { type: "Point", coordinates: [parseFloat(req.query.lng) , parseFloat(req.query.lat)] },
+    //                 distanceField: "dist.calculated",
+    //                 maxDistance: 100000,
+    //                 spherical: true
+    //     }).then((mobsters) => {
+    //         res.send(mobsters);
+    //     }).catch(next);
     });
 
 

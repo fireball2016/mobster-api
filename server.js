@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/mobstergo', (err, db) => {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mobstergo', (err, db) => {
   if (err) {
       console.log('Unable to connect to the server');
   } else {
