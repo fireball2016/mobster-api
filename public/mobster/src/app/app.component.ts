@@ -7,29 +7,22 @@ import 'rxjs/add/operator/map';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'app';
   data: any = {};
   url = 'http://localhost:3000/api/mobsters';
-  // proxyurl = 'https://cors-anywhere.herokuapp.com/';
-  constructor(private http: HttpClient) {
-    // console.log('Hellow user');
-    // this.getMobsters();
-    // this.getData();
-  }
-  ngOnInit(): void {
-    this.http.get(this.url).subscribe(data => {
-      console.log(data); });
-  }
-  // getData() {
-  //   return this.http.get(this.apiUrl).map((res: Response) => res.json());
-  // }
+  myData: any = [];
 
-  // getMobsters() {
-  //   this.getData().subscribe(data => {
-  //     console.log(data);
-  //     this.data = data; });
-  // }
+  constructor(private http: HttpClient) {
+
+  }
+  ngOnInit() {
+    this.http.get(this.url).subscribe((res) => {
+      this.myData = res;
+      console.log(res);
+    });
+  }
 
 
 }
